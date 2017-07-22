@@ -1,32 +1,42 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import UploadFile from './uploadFile';
 import '../styles/App.css';
 
 const logo = require('../images/logo.svg');
 
-export const PureApp = ({count = 0, dispatch}) => (
-  <div className="App">
-    <div className="App-header">
+const style = {
+  main: {
+    width: '100vw',
+    flexDirection: 'column',
+  },
+  header: {
+    width: '100vw',
+  },
+  wrapper: {
+    width: '100vw',
+    height: 'calc(100vh - 190px)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dropzone: {
+    width: 200,
+    height: 200,
+    border: '2px dotted #000',
+  },
+  activeStyle: {},
+  rejectStyle: {},
+};
+
+export const App = () =>
+  <div style={style.main} className="App">
+    <div style={style.header} className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
       <h2>Welcome to React</h2>
     </div>
-    <p className="App-intro">
-      To get started, edit <code>src/App.jsx</code> and save to reload.
-    </p>
-    <button onClick={ e => {dispatch({ type: "INC" });}}>INC</button>
-    { count }
-    <button onClick={ e => {dispatch({ type: "DEC" });}}>DEC</button>
-  </div>
-);
+    <div style={style.wrapper}>
+      <UploadFile />
+    </div>
+  </div>;
 
-PureApp.propTypes = {
-  count: PropTypes.number,
-  dispatch: PropTypes.func,
-};
-
-const mapStateToProps = state => ({
-  count: state.main.count,
-});
-
-export default connect(mapStateToProps)(PureApp);
+export default App;
